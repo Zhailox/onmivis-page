@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-void: #020713;
+    --color-navy: #0F2042;
+    --color-omnivis: #15355A;
+    --color-cyan: #00F5FF;
+    --color-teal: #00C2CB;
+    --color-violet: #835F9E;
+    --color-purple: #A378C6;
+  }
+
+  body {
+    background-color: #020713;
+    color: #e2e8f0;
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #020713;
+}
+::-webkit-scrollbar-thumb {
+  background: #15355A;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00F5FF;
+}
+
+/* Scanline Overlay */
+.scanlines {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+}
+
+/* Glow Utilities */
+.glow-cyan {
+  box-shadow: 0 0 25px rgba(0, 245, 255, 0.35);
+}
+
+.glow-cyan-lg {
+  box-shadow: 0 0 45px rgba(0, 245, 255, 0.55);
+}
+
+.glow-violet {
+  box-shadow: 0 0 25px rgba(131, 95, 158, 0.35);
+}
+
+.glow-text-cyan {
+  text-shadow: 0 0 15px rgba(0, 245, 255, 0.7);
+}
+
+.glow-text-violet {
+  text-shadow: 0 0 15px rgba(163, 120, 198, 0.7);
+}
+
+/* Hologram Grid Effect */
+.holo-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 245, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 245, 255, 0.05) 1px, transparent 1px);
+}
+
+.holo-grid-dense {
+  background-size: 20px 20px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 245, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 245, 255, 0.08) 1px, transparent 1px);
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: rgba(4, 13, 33, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.glass-panel-violet {
+  background: rgba(15, 11, 28, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(131, 95, 158, 0.25);
+}
+
+/* Animated Border Gradient */
+@keyframes border-beam {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.5deg);
+  }
+}
+
+.animate-float {
+  animation: float-slow 6s ease-in-out infinite;
+}

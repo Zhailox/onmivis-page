@@ -30,7 +30,7 @@ export const LaunchCTA: React.FC = () => {
           </h2>
 
           <p className="max-w-xl mx-auto text-sm sm:text-base text-slate-300 font-light leading-relaxed mb-8">
-            Ingresa al simulador directamente desde tu navegador en Vercel. 
+            Ingresa al simulador directamente desde tu navegador. 
             Sin descargas ni registros previos.
           </p>
 
@@ -44,7 +44,7 @@ export const LaunchCTA: React.FC = () => {
               className="relative group px-10 py-4 rounded-full text-sm font-orbitron font-black tracking-widest text-slate-950 bg-gradient-to-r from-[#00f5ff] via-[#3effff] to-[#835f9e] shadow-[0_0_30px_rgba(0,245,255,0.6)] hover:shadow-[0_0_45px_rgba(0,245,255,0.9)] transition-all transform hover:scale-105 active:scale-95 cursor-pointer flex items-center justify-center gap-3"
             >
               <Rocket className="w-5 h-5 fill-current animate-bounce" />
-              <span>DESPLEGAR EN VERCEL</span>
+              <span>DESPLEGAR</span>
               <ExternalLink className="w-4 h-4 opacity-80" />
             </a>
           </div>

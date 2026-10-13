@@ -2,6 +2,7 @@ import React from "react";
 import { Instagram, Github, Rocket } from "lucide-react";
 import { BRAND_INFO } from "../data/brandInfo";
 import { soundManager } from "../audio/soundManager";
+import { useLanguage } from "../i18n/LanguageContext";
 
 const TikTokIcon: React.FC<{ className?: string }> = ({ className }) => (
   <svg
@@ -14,6 +15,8 @@ const TikTokIcon: React.FC<{ className?: string }> = ({ className }) => (
 );
 
 export const FooterHUD: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <footer className="relative border-t border-white/10 bg-[#01050e] pt-12 pb-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
@@ -36,7 +39,7 @@ export const FooterHUD: React.FC = () => {
             </div>
 
             <p className="text-xs font-mono text-[#a378c6] uppercase tracking-wider">
-              {BRAND_INFO.slogan}
+              {t.footer.slogan}
             </p>
           </div>
 
@@ -66,7 +69,7 @@ export const FooterHUD: React.FC = () => {
               <TikTokIcon className="w-4 h-4" />
             </a>
 
-            {/* GitHub Repo pointing to the Game Repo */}
+            {/* GitHub Repo */}
             <a
               href={BRAND_INFO.links.githubRepo}
               target="_blank"
@@ -96,7 +99,7 @@ export const FooterHUD: React.FC = () => {
         {/* Bottom Credits */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono text-slate-500 text-center sm:text-left">
           <div>
-            © {new Date().getFullYear()} OMNIVIS. Todos los derechos reservados.
+            © {new Date().getFullYear()} OMNIVIS. {t.footer.rights}
           </div>
           <div className="flex items-center gap-4">
             <a
@@ -105,7 +108,7 @@ export const FooterHUD: React.FC = () => {
               rel="noopener noreferrer"
               className="hover:text-slate-300 transition-colors"
             >
-              GitHub (Estación Versalles)
+              {t.footer.gameRepoLink}
             </a>
             <span>•</span>
             <a
@@ -114,7 +117,7 @@ export const FooterHUD: React.FC = () => {
               rel="noopener noreferrer"
               className="text-[#00f5ff] hover:underline transition-colors"
             >
-              Jugar en Vercel
+              {t.footer.playVercelLink}
             </a>
           </div>
         </div>

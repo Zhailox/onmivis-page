@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Rocket, Play, ExternalLink, Github } from "lucide-react";
 import { GAME_INFO } from "../data/gameInfo";
 import { soundManager } from "../audio/soundManager";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export const HeroGame: React.FC = () => {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const { t } = useLanguage();
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -25,25 +27,25 @@ export const HeroGame: React.FC = () => {
         <div className="flex justify-center mb-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#031528]/80 border border-[#00f5ff]/30 text-[#00f5ff] text-xs font-mono tracking-widest uppercase">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>VIDEOJUEGO OFICIAL // DISPONIBLE EN LÍNEA</span>
+            <span>{t.hero.badge}</span>
           </div>
         </div>
 
         {/* Hero Title & Pitch */}
         <div className="text-center max-w-4xl mx-auto mb-10 space-y-4">
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-orbitron font-black text-white uppercase tracking-tight leading-none drop-shadow-[0_0_30px_rgba(0,245,255,0.3)]">
-            ESTACIÓN <br className="sm:hidden" />
+            {t.hero.titlePrefix} <br className="sm:hidden" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f5ff] via-[#835f9e] to-white">
-              VERSALLES
+              {t.hero.titleSuffix}
             </span>
           </h1>
 
           <p className="text-sm sm:text-base lg:text-lg font-orbitron font-medium tracking-widest text-cyan-300 uppercase">
-            {GAME_INFO.subtitle}
+            {t.hero.subtitle}
           </p>
 
           <p className="max-w-2xl mx-auto text-sm sm:text-base text-slate-300 font-light leading-relaxed">
-            {GAME_INFO.description}
+            {t.hero.description}
           </p>
 
           {/* Action Buttons */}
@@ -57,7 +59,7 @@ export const HeroGame: React.FC = () => {
               className="w-full sm:w-auto relative group px-8 py-3.5 rounded-full text-xs font-orbitron font-black tracking-widest text-slate-950 bg-gradient-to-r from-[#00f5ff] via-[#3effff] to-[#835f9e] shadow-[0_0_25px_rgba(0,245,255,0.5)] hover:shadow-[0_0_40px_rgba(0,245,255,0.8)] transition-all transform hover:scale-105 active:scale-95 cursor-pointer flex items-center justify-center gap-2.5 overflow-hidden"
             >
               <Rocket className="w-4 h-4 fill-current" />
-              <span>JUGAR EN VERCEL</span>
+              <span>{t.hero.playVercel}</span>
               <ExternalLink className="w-3.5 h-3.5 opacity-80" />
             </a>
 
@@ -69,7 +71,7 @@ export const HeroGame: React.FC = () => {
               className="w-full sm:w-auto px-6 py-3.5 rounded-full text-xs font-orbitron font-bold tracking-wider text-slate-300 hover:text-white bg-[#041024]/80 hover:bg-white/10 border border-white/10 hover:border-[#00f5ff]/40 transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <Github className="w-4 h-4" />
-              <span>CÓDIGO FUENTE (GITHUB)</span>
+              <span>{t.hero.sourceGithub}</span>
             </a>
           </div>
         </div>
@@ -103,7 +105,7 @@ export const HeroGame: React.FC = () => {
             >
               <div className="px-6 py-3 rounded-full bg-[#00f5ff] text-slate-950 font-orbitron font-black text-xs tracking-widest shadow-[0_0_25px_rgba(0,245,255,0.8)] flex items-center gap-2">
                 <Play className="w-4 h-4 fill-current" />
-                <span>INICIAR SIMULADOR</span>
+                <span>{t.hero.launchSimulator}</span>
               </div>
             </a>
           </div>

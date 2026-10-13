@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Music, Play, Pause, Volume2, VolumeX } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX } from "lucide-react";
 import { soundManager } from "../audio/soundManager";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export const SoundtrackSection: React.FC = () => {
   const [, setTick] = useState(0);
   const [equalizerBars, setEqualizerBars] = useState<number[]>(Array(16).fill(25));
   const animRef = useRef<number | null>(null);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const unsub = soundManager.subscribe(() => setTick((t) => t + 1));
@@ -60,18 +62,18 @@ export const SoundtrackSection: React.FC = () => {
         {/* Header */}
         <div className="mb-10 space-y-2">
           <span className="text-[11px] font-mono tracking-[0.25em] text-[#a378c6] uppercase">
-            BANDA SONORA OFICIAL
+            {t.soundtrack.badge}
           </span>
           <h2 className="text-3xl sm:text-4xl font-orbitron font-extrabold text-white uppercase tracking-tight">
-            Evolution of the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f5ff] to-[#a378c6]">Machine</span>
+            {t.soundtrack.titlePrefix} <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f5ff] to-[#a378c6]">{t.soundtrack.titleAccent}</span>
           </h2>
           <p className="text-sm text-slate-300 font-light max-w-lg mx-auto">
-            Música ambiental de ciencia ficción espacial compuesta para mantener el ritmo y la inmersión en la estación.
+            {t.soundtrack.description}
           </p>
         </div>
 
         {/* Clean, Simple Music Card */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#061838]/80 to-[#020b18]/90 border border-[#00f5ff]/25 shadow-xl backdrop-blur-xl">
+        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#061838]/80 to-[#020713]/90 border border-[#00f5ff]/25 shadow-xl backdrop-blur-xl">
           
           {/* Animated Equalizer Wave */}
           <div className="flex items-end justify-center gap-1.5 h-16 max-w-md mx-auto mb-8 px-4">
@@ -97,12 +99,12 @@ export const SoundtrackSection: React.FC = () => {
               {soundManager.isPlaying ? (
                 <>
                   <Pause className="w-4 h-4 fill-current" />
-                  <span>PAUSAR</span>
+                  <span>{t.soundtrack.pause}</span>
                 </>
               ) : (
                 <>
                   <Play className="w-4 h-4 fill-current" />
-                  <span>REPRODUCIR</span>
+                  <span>{t.soundtrack.play}</span>
                 </>
               )}
             </button>

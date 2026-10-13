@@ -1,16 +1,38 @@
 import React from "react";
 import { Orbit, Terminal, Sparkles, Zap } from "lucide-react";
-import { BRAND_INFO } from "../data/brandInfo";
 import { soundManager } from "../audio/soundManager";
-
-const iconMap: Record<string, React.ReactNode> = {
-  Orbit: <Orbit className="w-5 h-5 text-[#835f9e]" />,
-  Terminal: <Terminal className="w-5 h-5 text-[#00f5ff]" />,
-  Sparkles: <Sparkles className="w-5 h-5 text-[#a378c6]" />,
-  Zap: <Zap className="w-5 h-5 text-[#00f5ff]" />
-};
+import { useLanguage } from "../i18n/LanguageContext";
 
 export const BrandOmnivis: React.FC = () => {
+  const { t } = useLanguage();
+
+  const pillarsList = [
+    {
+      id: "hard-scifi",
+      title: t.brand.pillars.hardScifiTitle,
+      description: t.brand.pillars.hardScifiDesc,
+      icon: <Orbit className="w-5 h-5 text-[#835f9e]" />
+    },
+    {
+      id: "logic",
+      title: t.brand.pillars.logicTitle,
+      description: t.brand.pillars.logicDesc,
+      icon: <Terminal className="w-5 h-5 text-[#00f5ff]" />
+    },
+    {
+      id: "design",
+      title: t.brand.pillars.designTitle,
+      description: t.brand.pillars.designDesc,
+      icon: <Sparkles className="w-5 h-5 text-[#a378c6]" />
+    },
+    {
+      id: "performance",
+      title: t.brand.pillars.performanceTitle,
+      description: t.brand.pillars.performanceDesc,
+      icon: <Zap className="w-5 h-5 text-[#00f5ff]" />
+    }
+  ];
+
   return (
     <section id="omnivis" className="relative py-24 sm:py-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background glow */}
@@ -21,20 +43,20 @@ export const BrandOmnivis: React.FC = () => {
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-16">
           <span className="text-[11px] font-mono tracking-[0.25em] text-[#00f5ff] uppercase mb-3">
-            ESTUDIO & VISIÓN
+            {t.brand.badge}
           </span>
 
           <h2 className="text-3xl sm:text-5xl font-orbitron font-black tracking-tight text-white uppercase drop-shadow-[0_0_20px_rgba(0,245,255,0.3)]">
-            OMNIVIS <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f5ff] via-[#835f9e] to-white">LABS</span>
+            OMNIVIS <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f5ff] via-[#835f9e] to-white">{t.brand.titleSuffix}</span>
           </h2>
 
           {/* Slogan */}
           <div className="mt-3 px-3.5 py-1 rounded-full bg-[#00f5ff]/10 border border-[#00f5ff]/25 text-[11px] sm:text-xs font-mono tracking-[0.2em] text-[#00f5ff] uppercase">
-            {BRAND_INFO.slogan}
+            {t.brand.slogan}
           </div>
 
           <p className="mt-5 max-w-2xl text-sm sm:text-base text-slate-300 font-light leading-relaxed">
-            {BRAND_INFO.description}
+            {t.brand.description}
           </p>
         </div>
 
@@ -56,14 +78,14 @@ export const BrandOmnivis: React.FC = () => {
 
         {/* 4 Clean Pillars */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {BRAND_INFO.pillars.map((pillar) => (
+          {pillarsList.map((pillar) => (
             <div
               key={pillar.id}
               onMouseEnter={() => soundManager.playBeep(750, 0.015)}
               className="p-6 rounded-2xl bg-[#030e22]/80 border border-white/5 hover:border-[#00f5ff]/40 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(0,245,255,0.1)] flex flex-col justify-start"
             >
               <div className="w-10 h-10 rounded-xl bg-[#020713] border border-white/10 flex items-center justify-center mb-4">
-                {iconMap[pillar.iconName] || <Sparkles className="w-5 h-5 text-[#00f5ff]" />}
+                {pillar.icon}
               </div>
 
               <h4 className="text-base font-orbitron font-bold text-white mb-2">

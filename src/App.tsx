@@ -5,7 +5,6 @@ import { BrandOmnivis } from "./components/BrandOmnivis";
 import { HeroGame } from "./components/HeroGame";
 import { GameFeatures } from "./components/GameFeatures";
 import { SectorShowcase } from "./components/SectorShowcase";
-import { LiveMiniTerminal } from "./components/LiveMiniTerminal";
 import { SoundtrackSection } from "./components/SoundtrackSection";
 import { LaunchCTA } from "./components/LaunchCTA";
 import { FooterHUD } from "./components/FooterHUD";
@@ -13,37 +12,34 @@ import { FooterHUD } from "./components/FooterHUD";
 export const App: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-[#020713] text-slate-100 selection:bg-[#00f5ff]/30 selection:text-[#00f5ff] overflow-x-hidden">
-      {/* Interactive 3D Cosmic Starfield Canvas */}
+      {/* Background Starfield Canvas */}
       <SpaceCanvas />
 
-      {/* Global Floating HUD Navigation Header */}
+      {/* Floating HUD Navigation */}
       <HeaderHUD />
 
       {/* Main Content Flow */}
       <main className="relative z-10">
-        {/* 1. Omnivis Brand Section: Story, Vision, Manifesto & Core Pillars */}
+        {/* 1. Omnivis Brand: Studio, Vision & Core Pillars */}
         <BrandOmnivis />
 
-        {/* 2. Hero Game Section: Estación Versalles Presentation & 3D Tilt Centerpiece */}
+        {/* 2. Hero: Estación Versalles Showcase & Play Button */}
         <HeroGame />
 
-        {/* 3. Deep Mechanics & Hard Sci-Fi Engine: UNIX Terminal, Python/Java, Crisis Scenarios */}
+        {/* 3. Game Mechanics: UNIX Shell, Python/Java & Crisis Scenarios */}
         <GameFeatures />
 
-        {/* 4. Interactive Orbital Sector Telemetry Explorer */}
+        {/* 4. Orbital Sectors Explorer */}
         <SectorShowcase />
 
-        {/* 5. In-Page Live Interactive Terminal */}
-        <LiveMiniTerminal />
-
-        {/* 6. Soundtrack Section: Evolution of the Machine */}
+        {/* 5. Official Soundtrack: Evolution of the Machine */}
         <SoundtrackSection />
 
-        {/* 7. Final Launchpad Conversion CTA */}
+        {/* 6. Final Launchpad CTA */}
         <LaunchCTA />
       </main>
 
-      {/* 8. Maximalist Footer with Social Media & Telemetry */}
+      {/* 7. Clean Footer with Social Links */}
       <FooterHUD />
     </div>
   );

@@ -24,37 +24,40 @@ export const SectorShowcase: React.FC = () => {
   ];
 
   return (
-    <section id="sectores" className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section id="sectores" className="relative py-14 sm:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
-          <span className="text-[11px] font-mono tracking-[0.25em] text-[#00f5ff] uppercase">
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2">
+          <span className="text-[10px] sm:text-[11px] font-mono tracking-[0.2em] sm:tracking-[0.25em] text-[#00f5ff] uppercase">
             {t.sectors.badge}
           </span>
 
-          <h2 className="text-3xl sm:text-4xl font-orbitron font-extrabold text-white uppercase tracking-tight">
+          <h2 className="text-2xl sm:text-4xl font-orbitron font-extrabold text-white uppercase tracking-tight">
             {t.sectors.title} <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f5ff] to-[#a378c6]">{t.sectors.titleAccent}</span>
           </h2>
 
-          <p className="text-sm text-slate-300 font-light">
+          <p className="text-xs sm:text-sm text-slate-300 font-light px-1">
             {t.sectors.subtitle}
           </p>
         </div>
 
-        {/* Sector Tabs Navigation */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
-          {GAME_INFO.sectors.map((sec) => {
+        {/* Sector Tabs Navigation: 2-column grid on mobile, pill row on sm+ */}
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-2 mb-6 sm:mb-8">
+          {GAME_INFO.sectors.map((sec, idx) => {
             const isSelected = selectedSectorId === sec.id;
             const itemData = t.sectors.items[sec.id] || { name: sec.name };
+            const isLastOdd = idx === GAME_INFO.sectors.length - 1 && GAME_INFO.sectors.length % 2 === 1;
             return (
               <button
                 key={sec.id}
                 onClick={() => handleSelect(sec.id)}
-                className={`px-4 py-2 rounded-full text-xs font-orbitron font-semibold tracking-wider transition-all cursor-pointer ${
+                className={`${
+                  isLastOdd ? "col-span-2 sm:col-span-1" : ""
+                } px-3 sm:px-4 py-2.5 sm:py-2 rounded-xl sm:rounded-full text-[11px] sm:text-xs font-orbitron font-semibold tracking-wider transition-all cursor-pointer text-center truncate ${
                   isSelected
-                    ? "bg-[#00f5ff] text-slate-950 shadow-[0_0_15px_rgba(0,245,255,0.6)] scale-105"
-                    : "bg-[#041024]/80 text-slate-300 border border-white/10 hover:border-[#00f5ff]/40 hover:text-white"
+                    ? "bg-[#00f5ff] text-slate-950 shadow-[0_0_15px_rgba(0,245,255,0.6)] sm:scale-105"
+                    : "bg-[#041024]/85 text-slate-300 border border-white/10 hover:border-[#00f5ff]/40 hover:text-white"
                 }`}
               >
                 {itemData.name}
@@ -64,11 +67,11 @@ export const SectorShowcase: React.FC = () => {
         </div>
 
         {/* Active Sector Card */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center rounded-3xl p-6 sm:p-8 bg-gradient-to-br from-[#061838]/80 via-[#030d1e]/80 to-[#0c0820]/80 border border-[#00f5ff]/25 shadow-2xl backdrop-blur-xl mb-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-center rounded-2xl sm:rounded-3xl p-4 sm:p-8 bg-gradient-to-br from-[#061838]/85 via-[#030d1e]/90 to-[#0c0820]/85 border border-[#00f5ff]/25 shadow-2xl backdrop-blur-xl mb-10 sm:mb-14">
           
           {/* Sector Image */}
           <div className="lg:col-span-7">
-            <div className="relative rounded-2xl overflow-hidden aspect-video bg-[#010611] border border-white/10 group">
+            <div className="relative rounded-xl sm:rounded-2xl overflow-hidden aspect-video bg-[#010611] border border-white/10 group">
               <img
                 src={currentSectorMeta.image}
                 alt={currentSectorData.name}
@@ -85,11 +88,11 @@ export const SectorShowcase: React.FC = () => {
                 {currentSectorData.subtitle}
               </div>
 
-              <h3 className="text-2xl font-orbitron font-bold text-white mb-3">
+              <h3 className="text-xl sm:text-2xl font-orbitron font-bold text-white mb-2 sm:mb-3 leading-snug">
                 {currentSectorData.name}
               </h3>
 
-              <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mb-6">
+              <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed mb-4 sm:mb-6">
                 {currentSectorData.description}
               </p>
             </div>
@@ -99,10 +102,10 @@ export const SectorShowcase: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => soundManager.playLaser()}
-              className="w-full py-3 px-4 rounded-full text-xs font-orbitron font-bold tracking-widest text-slate-950 bg-gradient-to-r from-[#00f5ff] to-[#a378c6] hover:shadow-[0_0_20px_rgba(0,245,255,0.7)] transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3.5 sm:py-3 px-4 rounded-full text-xs font-orbitron font-bold tracking-wider sm:tracking-widest text-slate-950 bg-gradient-to-r from-[#00f5ff] to-[#a378c6] hover:shadow-[0_0_20px_rgba(0,245,255,0.7)] transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>{t.sectors.cta}</span>
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-4 h-4 shrink-0" />
             </a>
           </div>
 
@@ -110,26 +113,26 @@ export const SectorShowcase: React.FC = () => {
 
         {/* Secondary Destinations Grid */}
         <div>
-          <div className="flex items-center gap-2 text-xs font-orbitron font-bold tracking-widest text-[#a378c6] uppercase mb-4">
-            <Globe2 className="w-4 h-4 text-[#00f5ff]" />
+          <div className="flex items-center justify-center sm:justify-start gap-2 text-xs font-orbitron font-bold tracking-widest text-[#a378c6] uppercase mb-4">
+            <Globe2 className="w-4 h-4 text-[#00f5ff] shrink-0" />
             <span>{t.sectors.destinationsBadge}</span>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
             {destinations.map((dest, i) => (
               <div
                 key={i}
-                className="group relative rounded-2xl overflow-hidden bg-[#030e20] border border-white/10 hover:border-[#00f5ff]/40 transition-all duration-300 aspect-[4/3] flex flex-col justify-end p-3"
+                className="group relative rounded-xl sm:rounded-2xl overflow-hidden bg-[#030e20] border border-white/10 hover:border-[#00f5ff]/40 transition-all duration-300 aspect-[4/3] flex flex-col justify-end p-2.5 sm:p-3"
               >
                 <img
                   src={dest.img}
                   alt={dest.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 filter brightness-75 group-hover:brightness-90"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#020713] via-[#020713]/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#020713]/95 via-[#020713]/45 to-transparent" />
                 <div className="relative z-10">
-                  <div className="text-[9px] font-mono text-[#00f5ff] uppercase tracking-wider">{dest.type}</div>
-                  <div className="text-xs sm:text-sm font-orbitron font-bold text-white">{dest.name}</div>
+                  <div className="text-[8px] sm:text-[9px] font-mono text-[#00f5ff] uppercase tracking-wider truncate">{dest.type}</div>
+                  <div className="text-[11px] sm:text-sm font-orbitron font-bold text-white leading-tight">{dest.name}</div>
                 </div>
               </div>
             ))}

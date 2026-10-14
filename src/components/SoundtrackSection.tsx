@@ -56,27 +56,27 @@ export const SoundtrackSection: React.FC = () => {
   };
 
   return (
-    <section id="soundtrack" className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#030917]/80">
+    <section id="soundtrack" className="relative py-14 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#030917]/80">
       <div className="max-w-4xl mx-auto relative z-10 text-center">
         
         {/* Header */}
-        <div className="mb-10 space-y-2">
-          <span className="text-[11px] font-mono tracking-[0.25em] text-[#a378c6] uppercase">
+        <div className="mb-8 sm:mb-10 space-y-2">
+          <span className="text-[10px] sm:text-[11px] font-mono tracking-[0.2em] sm:tracking-[0.25em] text-[#a378c6] uppercase">
             {t.soundtrack.badge}
           </span>
-          <h2 className="text-3xl sm:text-4xl font-orbitron font-extrabold text-white uppercase tracking-tight">
+          <h2 className="text-2xl sm:text-4xl font-orbitron font-extrabold text-white uppercase tracking-tight">
             {t.soundtrack.titlePrefix} <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f5ff] to-[#a378c6]">{t.soundtrack.titleAccent}</span>
           </h2>
-          <p className="text-sm text-slate-300 font-light max-w-lg mx-auto">
+          <p className="text-xs sm:text-sm text-slate-300 font-light max-w-lg mx-auto px-1">
             {t.soundtrack.description}
           </p>
         </div>
 
         {/* Clean, Simple Music Card */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#061838]/80 to-[#020713]/90 border border-[#00f5ff]/25 shadow-xl backdrop-blur-xl">
+        <div className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-b from-[#061838]/85 to-[#020713]/95 border border-[#00f5ff]/25 shadow-xl backdrop-blur-xl">
           
           {/* Animated Equalizer Wave */}
-          <div className="flex items-end justify-center gap-1.5 h-16 max-w-md mx-auto mb-8 px-4">
+          <div className="flex items-end justify-center gap-1 sm:gap-1.5 h-14 sm:h-16 max-w-md mx-auto mb-6 sm:mb-8 px-2 sm:px-4">
             {equalizerBars.map((height, idx) => (
               <div
                 key={idx}
@@ -91,10 +91,10 @@ export const SoundtrackSection: React.FC = () => {
           </div>
 
           {/* Simple Control Bar */}
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5">
             <button
               onClick={handlePlayToggle}
-              className="px-6 py-3 rounded-full bg-[#00f5ff] hover:bg-[#3effff] text-slate-950 font-orbitron font-black text-xs tracking-wider shadow-[0_0_20px_rgba(0,245,255,0.5)] flex items-center gap-2 cursor-pointer transition-transform hover:scale-105 active:scale-95"
+              className="w-full sm:w-auto justify-center px-6 py-3.5 sm:py-3 rounded-full bg-[#00f5ff] hover:bg-[#3effff] text-slate-950 font-orbitron font-black text-xs tracking-wider shadow-[0_0_20px_rgba(0,245,255,0.5)] flex items-center gap-2 cursor-pointer transition-transform hover:scale-105 active:scale-95"
             >
               {soundManager.isPlaying ? (
                 <>
@@ -110,10 +110,10 @@ export const SoundtrackSection: React.FC = () => {
             </button>
 
             {/* Volume control */}
-            <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#020815] border border-white/10">
+            <div className="w-full sm:w-auto flex items-center justify-center gap-3 px-4 py-2.5 sm:py-2 rounded-full bg-[#020815] border border-white/10">
               <button
                 onClick={handleMuteToggle}
-                className="text-slate-400 hover:text-white transition-colors cursor-pointer"
+                className="text-slate-400 hover:text-white transition-colors cursor-pointer shrink-0"
               >
                 {soundManager.isMuted || soundManager.volume === 0 ? (
                   <VolumeX className="w-4 h-4 text-rose-400" />
@@ -129,7 +129,7 @@ export const SoundtrackSection: React.FC = () => {
                 step="0.05"
                 value={soundManager.isMuted ? 0 : soundManager.volume}
                 onChange={handleVolumeChange}
-                className="w-20 sm:w-28 h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-[#00f5ff]"
+                className="w-full max-w-[160px] sm:w-28 h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-[#00f5ff]"
               />
             </div>
           </div>

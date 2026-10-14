@@ -33,29 +33,29 @@ export const HeaderHUD: React.FC = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 sm:px-6 lg:px-8 pt-3 sm:pt-4">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-2.5 sm:px-6 lg:px-8 pt-2.5 sm:pt-4">
       <div
-        className={`max-w-6xl mx-auto rounded-full transition-all duration-300 px-4 sm:px-6 py-2.5 flex items-center justify-between gap-3 sm:gap-4 border ${
+        className={`max-w-6xl mx-auto rounded-full transition-all duration-300 px-3 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between gap-2 sm:gap-4 border ${
           isScrolled
-            ? "bg-[#020713]/85 border-[#00f5ff]/25 shadow-[0_10px_35px_rgba(0,0,0,0.8)] backdrop-blur-xl"
-            : "bg-[#040e22]/70 border-white/10 shadow-[0_5px_20px_rgba(0,0,0,0.5)] backdrop-blur-md"
+            ? "bg-[#020713]/90 border-[#00f5ff]/30 shadow-[0_10px_35px_rgba(0,0,0,0.85)] backdrop-blur-xl"
+            : "bg-[#040e22]/80 border-white/10 shadow-[0_5px_20px_rgba(0,0,0,0.5)] backdrop-blur-md"
         }`}
       >
-        {/* Brand / Logo */}
+        {/* Brand / Circular Logo */}
         <a
           href="#omnivis"
           onClick={() => soundManager.playBeep(800, 0.03)}
-          className="flex items-center gap-2.5 group cursor-pointer shrink-0"
+          className="flex items-center gap-2 sm:gap-2.5 group cursor-pointer shrink-0"
         >
-          <div className="w-8 h-8 rounded-full overflow-hidden p-1 bg-gradient-to-tr from-[#00f5ff]/20 to-[#835f9e]/30 border border-[#00f5ff]/40 flex items-center justify-center transition-transform group-hover:scale-110 shadow-[0_0_12px_rgba(0,245,255,0.3)]">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden bg-[#020918] border border-[#00f5ff]/50 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-[0_0_14px_rgba(0,245,255,0.35)]">
             <img
-              src="/assets/logo.webp"
+              src="/assets/logo-circle.webp"
               alt="Omnivis"
-              className="w-full h-full object-contain filter drop-shadow-[0_0_6px_rgba(0,245,255,0.6)]"
+              className="w-full h-full object-cover"
             />
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="font-orbitron font-extrabold text-sm sm:text-base tracking-[0.2em] text-white group-hover:text-[#00f5ff] transition-colors">
+            <span className="font-orbitron font-extrabold text-xs sm:text-base tracking-[0.14em] sm:tracking-[0.2em] text-white group-hover:text-[#00f5ff] transition-colors">
               OMNIVIS
             </span>
             <span className="w-1.5 h-1.5 rounded-full bg-[#00f5ff] shadow-[0_0_6px_#00f5ff]" />
@@ -78,7 +78,7 @@ export const HeaderHUD: React.FC = () => {
         </nav>
 
         {/* Right Actions: Language Toggle, Audio Player & Play Button */}
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           
           {/* Bilingual Language Switcher (ES / FR) */}
           <LanguageToggle />
@@ -103,43 +103,44 @@ export const HeaderHUD: React.FC = () => {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-1.5 rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
+            aria-label="Toggle Menu"
+            className="lg:hidden p-1.5 rounded-full text-slate-200 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5 text-[#00f5ff]" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden max-w-sm mx-auto mt-2 p-4 rounded-2xl bg-[#030e22]/95 border border-[#00f5ff]/30 shadow-2xl backdrop-blur-2xl animate-in fade-in slide-in-from-top-3 duration-200">
-          <div className="flex flex-col gap-2">
-            <div className="flex justify-center pb-2 border-b border-white/10">
-              <LanguageToggle />
-            </div>
-
+        <div className="lg:hidden max-w-md mx-auto mt-2 p-4 rounded-2xl bg-[#030e22]/95 border border-[#00f5ff]/35 shadow-[0_20px_50px_rgba(0,0,0,0.9)] backdrop-blur-2xl animate-in fade-in slide-in-from-top-3 duration-200">
+          <div className="flex flex-col gap-1.5">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={handleLinkClick}
-                className="px-4 py-2 rounded-xl text-xs font-semibold tracking-wider text-slate-200 hover:text-[#00f5ff] hover:bg-white/5 transition-colors flex items-center justify-between"
+                className="px-4 py-2.5 rounded-xl text-sm font-orbitron font-semibold tracking-wider text-slate-200 hover:text-[#00f5ff] hover:bg-[#00f5ff]/10 active:bg-[#00f5ff]/15 transition-colors flex items-center justify-between border border-transparent hover:border-[#00f5ff]/20"
               >
                 <span>{link.name}</span>
-                <span className="text-[#00f5ff]/60">→</span>
+                <span className="text-[#00f5ff] text-xs">→</span>
               </a>
             ))}
 
-            <div className="pt-2 border-t border-white/10 mt-1">
+            <div className="pt-2.5 border-t border-white/10 mt-1">
               <a
                 href={GAME_INFO.vercelUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => soundManager.playLaser()}
-                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-orbitron font-black tracking-wider text-slate-950 bg-gradient-to-r from-[#00f5ff] to-[#835f9e] shadow-[0_0_20px_rgba(0,245,255,0.5)]"
+                onClick={() => {
+                  soundManager.playLaser();
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-xs font-orbitron font-black tracking-widest text-slate-950 bg-gradient-to-r from-[#00f5ff] via-[#3effff] to-[#835f9e] shadow-[0_0_20px_rgba(0,245,255,0.5)]"
               >
                 <Rocket className="w-4 h-4 fill-current" />
                 <span>{t.nav.playNow}</span>
+                <ExternalLink className="w-3.5 h-3.5 opacity-80" />
               </a>
             </div>
           </div>

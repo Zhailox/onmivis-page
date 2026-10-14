@@ -18,19 +18,19 @@ export const FooterHUD: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <footer className="relative border-t border-white/10 bg-[#01050e] pt-12 pb-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <footer className="relative border-t border-white/10 bg-[#01050e] pt-10 sm:pt-12 pb-8 sm:pb-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
         
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-8 border-b border-white/5">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8 pb-6 sm:pb-8 border-b border-white/5">
           
           {/* Brand Info */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-2">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full overflow-hidden p-1 bg-[#041228] border border-[#00f5ff]/40 flex items-center justify-center">
+              <div className="w-9 h-9 rounded-full overflow-hidden bg-[#020918] border border-[#00f5ff]/50 flex items-center justify-center shadow-[0_0_12px_rgba(0,245,255,0.3)]">
                 <img
-                  src="/assets/logo.webp"
+                  src="/assets/logo-circle.webp"
                   alt="Omnivis Logo"
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <span className="font-orbitron font-extrabold text-base tracking-[0.2em] text-white">
@@ -38,7 +38,7 @@ export const FooterHUD: React.FC = () => {
               </span>
             </div>
 
-            <p className="text-xs font-mono text-[#a378c6] uppercase tracking-wider">
+            <p className="text-[10px] sm:text-xs font-mono text-[#a378c6] uppercase tracking-wide sm:tracking-wider max-w-xs sm:max-w-none leading-relaxed">
               {t.footer.slogan}
             </p>
           </div>

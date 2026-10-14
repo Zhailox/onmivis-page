@@ -66,13 +66,13 @@ export const AudioPlayerHUD: React.FC = () => {
   return (
     <div className="relative flex items-center">
       {/* Sleek Music Pill */}
-      <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-[#040e20]/90 border border-[#00f5ff]/30 hover:border-[#00f5ff]/60 shadow-[0_0_15px_rgba(0,245,255,0.15)] backdrop-blur-xl transition-all">
+      <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full bg-[#040e20]/90 border border-[#00f5ff]/30 hover:border-[#00f5ff]/60 shadow-[0_0_15px_rgba(0,245,255,0.15)] backdrop-blur-xl transition-all">
         
         {/* Play/Pause Button with mini equalizer */}
         <button
           onClick={handlePlayToggle}
           title={soundManager.isPlaying ? "Pausar música" : "Reproducir 'Evolution of the Machine'"}
-          className={`flex items-center gap-1.5 px-2 py-0.5 rounded-full transition-all cursor-pointer ${
+          className={`flex items-center gap-1.5 px-1.5 sm:px-2 py-0.5 rounded-full transition-all cursor-pointer ${
             soundManager.isPlaying
               ? "text-[#00f5ff] bg-[#00f5ff]/15 shadow-[0_0_10px_rgba(0,245,255,0.3)]"
               : "text-slate-400 hover:text-white hover:bg-white/5"
@@ -113,9 +113,9 @@ export const AudioPlayerHUD: React.FC = () => {
           )}
         </button>
 
-        {/* Inline discreet volume control that expands on hover */}
+        {/* Inline discreet volume control that expands on hover (Desktop only to avoid touch overflow) */}
         <div
-          className={`overflow-hidden transition-all duration-300 flex items-center ${
+          className={`hidden md:flex overflow-hidden transition-all duration-300 items-center ${
             showVolume ? "w-16 opacity-100 pr-1" : "w-0 opacity-0"
           }`}
           onMouseLeave={() => setShowVolume(false)}

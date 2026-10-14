@@ -1,59 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Orbit, Terminal, Sparkles, Zap } from "lucide-react";
 import { soundManager } from "../audio/soundManager";
 import { useLanguage } from "../i18n/LanguageContext";
 
-type LogoVariant = "square" | "circle-full" | "circle" | "icon" | "horizontal";
-
 export const BrandOmnivis: React.FC = () => {
-  const { t, language } = useLanguage();
-  const [logoVariant, setLogoVariant] = useState<LogoVariant>("square");
-
-  const logoVariants: {
-    id: LogoVariant;
-    label: string;
-    src: string;
-    containerClass: string;
-    imgClass: string;
-  }[] = [
-    {
-      id: "square",
-      label: language === "es" ? "Cuadrada" : "Carré",
-      src: "/assets/logo-square.webp",
-      containerClass: "w-56 h-56 sm:w-72 sm:h-72 rounded-2xl p-3 sm:p-4",
-      imgClass: "w-full h-full object-contain drop-shadow-[0_0_20px_rgba(0,245,255,0.45)]"
-    },
-    {
-      id: "circle-full",
-      label: language === "es" ? "Circular" : "Circulaire",
-      src: "/assets/logo-circle-full.webp",
-      containerClass: "w-56 h-56 sm:w-72 sm:h-72 rounded-full p-1.5 sm:p-2",
-      imgClass: "w-full h-full object-contain rounded-full drop-shadow-[0_0_25px_rgba(0,245,255,0.5)]"
-    },
-    {
-      id: "circle",
-      label: language === "es" ? "Emblema" : "Emblème",
-      src: "/assets/logo-circle.webp",
-      containerClass: "w-52 h-52 sm:w-64 sm:h-64 rounded-full p-1.5 sm:p-2",
-      imgClass: "w-full h-full object-contain rounded-full drop-shadow-[0_0_25px_rgba(0,245,255,0.55)]"
-    },
-    {
-      id: "icon",
-      label: language === "es" ? "Isotipo" : "Icône",
-      src: "/assets/logo-icon.webp",
-      containerClass: "w-52 h-52 sm:w-64 sm:h-64 rounded-3xl p-4 sm:p-6",
-      imgClass: "w-full h-full object-contain drop-shadow-[0_0_28px_rgba(0,245,255,0.6)]"
-    },
-    {
-      id: "horizontal",
-      label: language === "es" ? "Horizontal" : "Bannière",
-      src: "/assets/logo-horizontal.webp",
-      containerClass: "w-72 h-28 sm:w-[440px] sm:h-36 rounded-2xl px-4 py-3",
-      imgClass: "w-full h-full object-contain drop-shadow-[0_0_20px_rgba(0,245,255,0.45)]"
-    }
-  ];
-
-  const activeLogo = logoVariants.find((v) => v.id === logoVariant) || logoVariants[0];
+  const { t } = useLanguage();
 
   const pillarsList = [
     {
@@ -109,52 +60,16 @@ export const BrandOmnivis: React.FC = () => {
           </p>
         </div>
 
-        {/* Central Logo & Adaptive Container Presentation */}
-        <div className="flex flex-col items-center justify-center mb-10 sm:mb-14">
-          <div
-            className={`relative group p-3 sm:p-6 ${
-              logoVariant === "circle" || logoVariant === "circle-full" ? "rounded-full" : "rounded-3xl"
-            } bg-gradient-to-b from-[#061838]/85 via-[#041024]/95 to-[#0b091e]/90 border border-[#00f5ff]/30 shadow-[0_0_40px_rgba(0,245,255,0.18)] backdrop-blur-xl transition-all duration-300 hover:border-[#00f5ff]/60`}
-          >
-            <div
-              className={`relative flex items-center justify-center overflow-hidden bg-[#020815]/80 holo-grid border border-white/5 transition-all duration-300 ${activeLogo.containerClass}`}
-            >
-              {logoVariant !== "horizontal" && (
-                <>
-                  <div className="absolute inset-1.5 border border-[#00f5ff]/20 rounded-full animate-spin [animation-duration:40s] pointer-events-none" />
-                  <div className="absolute inset-5 border border-[#835f9e]/25 rounded-full border-dashed animate-spin [animation-duration:25s] pointer-events-none" />
-                </>
-              )}
-
+        {/* Central Horizontal Logo Showcase */}
+        <div className="flex justify-center mb-10 sm:mb-14">
+          <div className="relative group p-3 sm:p-5 rounded-3xl bg-gradient-to-b from-[#061838]/85 via-[#041024]/95 to-[#0b091e]/90 border border-[#00f5ff]/30 shadow-[0_0_40px_rgba(0,245,255,0.18)] backdrop-blur-xl transition-all duration-300 hover:border-[#00f5ff]/60 w-full max-w-[320px] sm:max-w-[480px]">
+            <div className="relative w-full h-24 sm:h-36 flex items-center justify-center overflow-hidden rounded-2xl bg-[#020815]/80 holo-grid border border-white/5 px-4 py-3">
               <img
-                src={activeLogo.src}
-                alt={`Omnivis Logo - ${activeLogo.label}`}
-                className={`relative z-10 transition-all duration-500 group-hover:scale-105 ${activeLogo.imgClass}`}
+                src="/assets/logo-horizontal.webp"
+                alt="Omnivis Logo"
+                className="w-full h-full object-contain relative z-10 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_0_20px_rgba(0,245,255,0.45)]"
               />
             </div>
-          </div>
-
-          {/* Logo Format Selector Pills */}
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 px-2">
-            {logoVariants.map((variant) => {
-              const isSelected = logoVariant === variant.id;
-              return (
-                <button
-                  key={variant.id}
-                  onClick={() => {
-                    soundManager.playBeep(820, 0.015);
-                    setLogoVariant(variant.id);
-                  }}
-                  className={`px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-mono tracking-wider uppercase transition-all cursor-pointer ${
-                    isSelected
-                      ? "bg-[#00f5ff]/20 text-[#00f5ff] border border-[#00f5ff]/60 shadow-[0_0_12px_rgba(0,245,255,0.3)]"
-                      : "bg-[#030d1e]/80 text-slate-400 border border-white/10 hover:text-slate-200 hover:border-white/25"
-                  }`}
-                >
-                  {variant.label}
-                </button>
-              );
-            })}
           </div>
         </div>
 

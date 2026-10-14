@@ -115,7 +115,7 @@ export const translations: Record<Language, Translations> = {
       features: "Mecánicas",
       sectors: "Sectores",
       soundtrack: "Soundtrack",
-      playNow: "JUGAR AHORA"
+      playNow: "JUGAR"
     },
     brand: {
       badge: "ESTUDIO & VISIÓN",
@@ -139,7 +139,7 @@ export const translations: Record<Language, Translations> = {
       titleSuffix: "VERSALLES",
       subtitle: "Simulador de Ingeniería Aeroespacial & Programación Orbital",
       description: "Toma el control de un complejo orbital en el espacio profundo. Enfrenta crisis críticas de sistemas, comanda naves y estabiliza reactores mediante programación en Python y Java en una consola interactiva bilingüe.",
-      playVercel: "JUGAR EN VERCEL",
+      playVercel: "JUGAR",
       sourceGithub: "CÓDIGO FUENTE (GITHUB)",
       launchSimulator: "INICIAR SIMULADOR"
     },
@@ -226,14 +226,14 @@ export const translations: Record<Language, Translations> = {
     launchCta: {
       titlePrefix: "¿Listo para asumir el",
       titleAccent: "Mando de la Estación?",
-      description: "Ingresa al simulador directamente desde tu navegador en Vercel. Sin descargas ni registros previos.",
-      cta: "DESPLEGAR EN VERCEL"
+      description: "Ingresa al simulador directamente desde tu navegador. Sin descargas ni registros previos.",
+      cta: "JUGAR"
     },
     footer: {
       slogan: "INTELLIGENCE QUI TRANSFORME VOTRE ENVIRONNEMENT",
       rights: "Todos los derechos reservados.",
       gameRepoLink: "GitHub (Estación Versalles)",
-      playVercelLink: "Jugar en Vercel"
+      playVercelLink: "Jugar"
     }
   },
   fr: {
@@ -267,7 +267,7 @@ export const translations: Record<Language, Translations> = {
       titleSuffix: "VERSAILLES",
       subtitle: "Simulateur d'Ingénierie Aérospatiale & Programmation Orbitale",
       description: "Prenez les commandes d'un complexe orbital au cœur de l'espace profond. Affrontez des pannes critiques, pilotez des vaisseaux et stabilisez des réacteurs grâce à la programmation Python et Java sur console interactive bilingue.",
-      playVercel: "JOUER SUR VERCEL",
+      playVercel: "JOUER",
       sourceGithub: "CODE SOURCE (GITHUB)",
       launchSimulator: "LANCER LE SIMULATEUR"
     },
@@ -337,7 +337,7 @@ export const translations: Record<Language, Translations> = {
         },
         escudos: {
           name: "Matrice de Boucliers",
-          subtitle: "Défense Électromagnétique",
+          subtitle: "Défense Electromagnétique",
           description: "Champs de dispersion ionique protégeant l'équipage contre le rayonnement stellaire à haute énergie et les micrométéorites."
         }
       }
@@ -354,14 +354,14 @@ export const translations: Record<Language, Translations> = {
     launchCta: {
       titlePrefix: "Prêt à prendre les",
       titleAccent: "Commandes de la Station ?",
-      description: "Lancez le simulateur directement depuis votre navigateur sur Vercel. Sans téléchargement ni inscription.",
-      cta: "DÉPLOYER SUR VERCEL"
+      description: "Lancez le simulateur directement depuis votre navigateur. Sans téléchargement ni inscription.",
+      cta: "JOUER"
     },
     footer: {
       slogan: "INTELLIGENCE QUI TRANSFORME VOTRE ENVIRONNEMENT",
       rights: "Tous droits réservés.",
       gameRepoLink: "GitHub (Station Versailles)",
-      playVercelLink: "Jouer sur Vercel"
+      playVercelLink: "Jouer"
     }
   }
 };

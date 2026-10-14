@@ -81,14 +81,14 @@ export const FooterHUD: React.FC = () => {
               <Github className="w-4 h-4" />
             </a>
 
-            {/* Game on Vercel */}
+            {/* Game Link */}
             <a
               href={BRAND_INFO.links.gameVercel}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => soundManager.playLaser()}
               className="w-9 h-9 rounded-full bg-[#041228] hover:bg-[#00f5ff]/20 border border-white/10 hover:border-[#00f5ff] text-slate-300 hover:text-[#00f5ff] flex items-center justify-center transition-all cursor-pointer hover:scale-105"
-              title="Jugar Estación Versalles en Vercel"
+              title="Jugar"
             >
               <Rocket className="w-4 h-4 fill-current" />
             </a>

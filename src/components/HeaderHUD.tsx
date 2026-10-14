@@ -33,19 +33,19 @@ export const HeaderHUD: React.FC = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-2.5 sm:px-6 lg:px-8 pt-2.5 sm:pt-4">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-3 sm:px-6 lg:px-8 pt-2.5 sm:pt-4">
       <div
-        className={`max-w-6xl mx-auto rounded-full transition-all duration-300 px-3 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between gap-2 sm:gap-4 border ${
+        className={`w-full max-w-6xl mx-auto rounded-full transition-all duration-300 px-2.5 sm:px-6 py-1.5 sm:py-2.5 flex items-center justify-between gap-1.5 sm:gap-4 border ${
           isScrolled
             ? "bg-[#020713]/90 border-[#00f5ff]/30 shadow-[0_10px_35px_rgba(0,0,0,0.85)] backdrop-blur-xl"
             : "bg-[#040e22]/80 border-white/10 shadow-[0_5px_20px_rgba(0,0,0,0.5)] backdrop-blur-md"
         }`}
       >
-        {/* Brand / Circular Logo */}
+        {/* Brand / Circular Logo (Wordmark hidden on mobile so nav controls fit comfortably) */}
         <a
           href="#omnivis"
           onClick={() => soundManager.playBeep(800, 0.03)}
-          className="flex items-center gap-2 sm:gap-2.5 group cursor-pointer shrink-0"
+          className="flex items-center gap-2.5 group cursor-pointer shrink-0"
         >
           <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden bg-[#020918] border border-[#00f5ff]/50 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-[0_0_14px_rgba(0,245,255,0.35)]">
             <img
@@ -54,8 +54,8 @@ export const HeaderHUD: React.FC = () => {
               className="w-full h-full object-cover"
             />
           </div>
-          <div className="flex items-center gap-1.5">
-            <span className="font-orbitron font-extrabold text-xs sm:text-base tracking-[0.14em] sm:tracking-[0.2em] text-white group-hover:text-[#00f5ff] transition-colors">
+          <div className="hidden sm:flex items-center gap-1.5">
+            <span className="font-orbitron font-extrabold text-sm sm:text-base tracking-[0.2em] text-white group-hover:text-[#00f5ff] transition-colors">
               OMNIVIS
             </span>
             <span className="w-1.5 h-1.5 rounded-full bg-[#00f5ff] shadow-[0_0_6px_#00f5ff]" />
@@ -86,7 +86,7 @@ export const HeaderHUD: React.FC = () => {
           {/* Audio Player Widget */}
           <AudioPlayerHUD />
 
-          {/* Vercel Play Button */}
+          {/* Play Button */}
           <a
             href={GAME_INFO.vercelUrl}
             target="_blank"
@@ -104,7 +104,7 @@ export const HeaderHUD: React.FC = () => {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Menu"
-            className="lg:hidden p-1.5 rounded-full text-slate-200 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
+            className="lg:hidden shrink-0 p-1.5 rounded-full text-slate-200 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors"
           >
             {mobileMenuOpen ? <X className="w-4 h-4 sm:w-5 sm:h-5 text-[#00f5ff]" /> : <Menu className="w-4 h-4 sm:w-5 sm:h-5" />}
           </button>

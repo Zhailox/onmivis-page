@@ -10,10 +10,19 @@ export const SoundtrackSection: React.FC = () => {
   const { t } = useLanguage();
 
   useEffect(() => {
-    const unsub = soundManager.subscribe(() => setTick((t) => t + 1));
+    let lastUpdate = 0;
 
-    const updateVisualizer = () => {
-      if (soundManager.isPlaying && !soundManager.isMuted) {
+    const updateVisualizer = (now: number) => {
+      if (!soundManager.isPlaying || soundManager.isMuted) {
+        setEqualizerBars((prev) =>
+          prev.every((v) => v === 15) ? prev : Array(16).fill(15)
+        );
+        animRef.current = null;
+        return;
+      }
+
+      if (now - lastUpdate >= 60) {
+        lastUpdate = now;
         const freq = soundManager.getFrequencyData();
         if (freq.length > 0) {
           const sample = Array.from({ length: 16 }, (_, i) => {
@@ -27,13 +36,29 @@ export const SoundtrackSection: React.FC = () => {
             Array.from({ length: 16 }, (_, i) => Math.sin(t + i * 0.4) * 35 + 50)
           );
         }
-      } else {
-        setEqualizerBars(Array(16).fill(15));
       }
       animRef.current = requestAnimationFrame(updateVisualizer);
     };
 
-    animRef.current = requestAnimationFrame(updateVisualizer);
+    const syncLoop = () => {
+      setTick((t) => t + 1);
+      if (soundManager.isPlaying && !soundManager.isMuted) {
+        if (!animRef.current) {
+          animRef.current = requestAnimationFrame(updateVisualizer);
+        }
+      } else {
+        if (animRef.current) {
+          cancelAnimationFrame(animRef.current);
+          animRef.current = null;
+        }
+        setEqualizerBars((prev) =>
+          prev.every((v) => v === 15) ? prev : Array(16).fill(15)
+        );
+      }
+    };
+
+    const unsub = soundManager.subscribe(syncLoop);
+    syncLoop();
 
     return () => {
       unsub();

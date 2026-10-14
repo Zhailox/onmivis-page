@@ -5,7 +5,7 @@ interface Star {
   y: number;
   z: number;
   size: number;
-  color: string;
+  sprite: HTMLCanvasElement;
   speed: number;
 }
 
@@ -15,12 +15,13 @@ export const SpaceCanvas: React.FC = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
     let animationFrameId: number;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
+    const isMobile = width < 768;
 
     let mouseX = width / 2;
     let mouseY = height / 2;
@@ -28,7 +29,25 @@ export const SpaceCanvas: React.FC = () => {
     let targetMouseY = mouseY;
 
     const colors = ["#00F5FF", "#835F9E", "#A378C6", "#ffffff", "#00C2CB"];
-    const starCount = 180;
+
+    // Pre-render glowing star sprites once to avoid expensive per-frame ctx.shadowBlur on mobile GPUs
+    const sprites: HTMLCanvasElement[] = colors.map((color) => {
+      const sCanvas = document.createElement("canvas");
+      sCanvas.width = 24;
+      sCanvas.height = 24;
+      const sCtx = sCanvas.getContext("2d");
+      if (sCtx) {
+        sCtx.beginPath();
+        sCtx.arc(12, 12, 3, 0, Math.PI * 2);
+        sCtx.fillStyle = color;
+        sCtx.shadowColor = color;
+        sCtx.shadowBlur = 8;
+        sCtx.fill();
+      }
+      return sCanvas;
+    });
+
+    const starCount = isMobile ? 95 : 180;
     const stars: Star[] = [];
 
     for (let i = 0; i < starCount; i++) {
@@ -37,7 +56,7 @@ export const SpaceCanvas: React.FC = () => {
         y: Math.random() * height,
         z: Math.random() * 2 + 0.5,
         size: Math.random() * 1.8 + 0.4,
-        color: colors[Math.floor(Math.random() * colors.length)],
+        sprite: sprites[Math.floor(Math.random() * sprites.length)],
         speed: Math.random() * 0.3 + 0.1
       });
     }
@@ -52,12 +71,16 @@ export const SpaceCanvas: React.FC = () => {
       targetMouseY = e.clientY;
     };
 
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("resize", handleResize, { passive: true });
+    if (!isMobile) {
+      window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    }
 
     const render = () => {
-      mouseX += (targetMouseX - mouseX) * 0.05;
-      mouseY += (targetMouseY - mouseY) * 0.05;
+      if (!isMobile) {
+        mouseX += (targetMouseX - mouseX) * 0.05;
+        mouseY += (targetMouseY - mouseY) * 0.05;
+      }
 
       ctx.clearRect(0, 0, width, height);
 
@@ -77,7 +100,7 @@ export const SpaceCanvas: React.FC = () => {
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
 
-      // Render drifting stars
+      // Render drifting stars using hardware-accelerated pre-rendered glowing sprites
       const offsetX = (mouseX - width / 2) * 0.015;
       const offsetY = (mouseY - height / 2) * 0.015;
 
@@ -91,13 +114,15 @@ export const SpaceCanvas: React.FC = () => {
 
         const renderX = star.x - offsetX * star.z;
         const renderY = star.y - offsetY * star.z;
+        const drawSize = star.size * 5.5;
 
-        ctx.beginPath();
-        ctx.arc(renderX, renderY, star.size, 0, Math.PI * 2);
-        ctx.fillStyle = star.color;
-        ctx.shadowColor = star.color;
-        ctx.shadowBlur = star.size * 3;
-        ctx.fill();
+        ctx.drawImage(
+          star.sprite,
+          renderX - drawSize / 2,
+          renderY - drawSize / 2,
+          drawSize,
+          drawSize
+        );
       }
 
       animationFrameId = requestAnimationFrame(render);

@@ -9,12 +9,19 @@ export const AudioPlayerHUD: React.FC = () => {
   const animRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const unsubscribe = soundManager.subscribe(() => {
-      setTick((prev) => prev + 1);
-    });
+    let lastUpdate = 0;
 
-    const updateBars = () => {
-      if (soundManager.isPlaying && !soundManager.isMuted) {
+    const updateBars = (now: number) => {
+      if (!soundManager.isPlaying || soundManager.isMuted) {
+        setEqualizerBars((prev) =>
+          prev.every((v) => v === 20) ? prev : [20, 20, 20, 20]
+        );
+        animRef.current = null;
+        return;
+      }
+
+      if (now - lastUpdate >= 60) {
+        lastUpdate = now;
         const freqData = soundManager.getFrequencyData();
         if (freqData.length > 0) {
           const sample = [
@@ -33,13 +40,29 @@ export const AudioPlayerHUD: React.FC = () => {
             Math.cos(t * 1.6) * 35 + 50
           ]);
         }
-      } else {
-        setEqualizerBars([20, 20, 20, 20]);
       }
       animRef.current = requestAnimationFrame(updateBars);
     };
 
-    animRef.current = requestAnimationFrame(updateBars);
+    const syncLoop = () => {
+      setTick((prev) => prev + 1);
+      if (soundManager.isPlaying && !soundManager.isMuted) {
+        if (!animRef.current) {
+          animRef.current = requestAnimationFrame(updateBars);
+        }
+      } else {
+        if (animRef.current) {
+          cancelAnimationFrame(animRef.current);
+          animRef.current = null;
+        }
+        setEqualizerBars((prev) =>
+          prev.every((v) => v === 20) ? prev : [20, 20, 20, 20]
+        );
+      }
+    };
+
+    const unsubscribe = soundManager.subscribe(syncLoop);
+    syncLoop();
 
     return () => {
       unsubscribe();
